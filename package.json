@@ -11,5 +11,11 @@
   "description": "",
   "dependencies": {
     "express": "^4.21.1"
+  },
+  "contributors": [],
+  "scripts": {
+    "dev": "",
+    "test": "mocha",
+    "start": "node server.js"
   }
 }
