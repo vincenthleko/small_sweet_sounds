@@ -8,89 +8,134 @@
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
   </head>
-  <body>
-    <h1>Welcome to Small Sweet Sounds</h1>
+  <body class="bg-light">
+    <div class="container">
+      <h1 class="text-center mt-4">Welcome to Small Sweet Sounds</h1>
 
-    <nav class="navbar" x-data="{ open: false, dropdownOpen: false }">
-      <img src="logo.jpg" alt="Brand Logo" class="logo nav-logo" />
-
-      <!-- Desktop Menu -->
-      <ul class="nav-menu">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
-
-        <li class="nav-item" :class="{ open: dropdownOpen }">
-          <a href="#" @click="dropdownOpen = !dropdownOpen" class="nav-link"
-            >Upcoming Events ▾</a
+      <!-- Navbar -->
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-dark mt-3"
+        x-data="{ open: false, dropdownOpen: false }"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="logo.jpg" alt="Brand Logo" class="logo nav-logo" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            @click="open = !open"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-          <div x-show="dropdownOpen" class="dropdown-content">
-            <ul>
-              <li><a href="#">Outdoor Experience - 10/11/2024</a></li>
-              <li><a href="#">Music Fest - 12/01/2024</a></li>
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            :class="{ 'show': open }"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+              </li>
+              <li class="nav-item dropdown" :class="{ 'show': dropdownOpen }">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  @click="dropdownOpen = !dropdownOpen"
+                  aria-expanded="false"
+                >
+                  Upcoming Events
+                </a>
+                <ul
+                  class="dropdown-menu"
+                  :class="{ 'show': dropdownOpen }"
+                  x-show="dropdownOpen"
+                >
+                  <li>
+                    <a class="dropdown-item" href="#"
+                      >Outdoor Experience - 10/11/2024</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"
+                      >Outdoor Experience - 28/12/2024</a
+                    >
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
-        </li>
-      </ul>
-
-      <!-- Hamburger Button for Small Screens -->
-      <button @click="open = !open" class="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-
-      <!-- Mobile Menu (Only visible when 'open' is true) -->
-      <div
-        x-show="open"
-        class="mobile-menu"
-        @click.away="open = false"
-        x-transition
-      >
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-
-          <!-- Mobile Dropdown for Upcoming Events -->
-          <li class="nav-item">
-            <a href="#" @click="dropdownOpen = !dropdownOpen" class="nav-link">
-              Upcoming Events ▾
-            </a>
-            <div x-show="dropdownOpen" class="dropdown-content">
-              <ul>
-                <li><a href="#">Outdoor Experience - 10/11/2024</a></li>
-                <li><a href="#">Music Fest - 12/01/2024</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <div x-data="productList" x-init="fetchProducts()" id="products">
-      <template x-for="product in products" :key="product.id">
-        <div class="product">
-          <img
-            :src="`/${product.image}`"
-            :alt="product.name"
-            class="product-image"
-          />
-          <h2 x-text="product.name"></h2>
-          <p x-text="product.description"></p>
-          <p
-            x-text="new Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR' }).format(product.price)"
-          ></p>
         </div>
-      </template>
+      </nav>
+
+      <!-- Products Section -->
+      <div
+        x-data="productList"
+        x-init="fetchProducts()"
+        id="products"
+        class="row mt-5"
+      >
+        <template x-for="product in products" :key="product.id">
+          <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card h-100">
+              <img
+                :src="`/${product.image}`"
+                :alt="product.name"
+                class="card-img-top product-image d-block mx-auto"
+              />
+
+              <div class="card-body">
+                <h5 class="card-title" x-text="product.name"></h5>
+                <p class="card-text" x-text="product.description"></p>
+                <p
+                  class="card-text fw-bold"
+                  x-text="new Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR' }).format(product.price)"
+                ></p>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer text-center py-4 bg-dark text-white mt-5">
+        <p>© 2024 Small Sweet Sounds</p>
+      </footer>
     </div>
 
-    <footer class="footer">
-      <p>© 2024 Small Sweet Sounds</p>
-    </footer>
-
+    <!-- Alpine.js Script -->
     <script src="app.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
