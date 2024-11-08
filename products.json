@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "name": "Basic Sound System",
+      "price": 500,
+      "description": "Perfect for small gatherings.",
+      "image": "basic_sound.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Premium Sound System",
+      "price": 1500,
+      "description": "Ideal for large events.",
+      "image": "premium_sound.jpg"
+    }
+  ]
+  

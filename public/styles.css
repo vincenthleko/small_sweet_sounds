@@ -1,0 +1,220 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+#products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 200px;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  max-width: 200px; /* Adjust size as needed */
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+/* Basic Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #333;
+}
+
+.logo {
+  width: 150px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-menu li {
+  margin-right: 2rem;
+}
+
+.nav-menu li a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  padding: 1rem;
+}
+
+.dropdown-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dropdown-content a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.nav-item.open .dropdown-content {
+  display: block;
+}
+
+/* Hamburger Menu Styles for Small Screens */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  width: 30px;
+  height: 25px;
+  justify-content: space-around;
+}
+
+.hamburger .bar {
+  width: 100%;
+  height: 4px;
+  background-color: white;
+}
+
+/* .mobile-menu {
+  display: none;
+  background-color: #333;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 200px;
+  padding: 1rem;
+  text-align: left;
+} */
+
+.mobile-menu {
+  display: none;
+  position: absolute; /* Position it relative to the hamburger button */
+  top: 100%; /* Position it just below the hamburger */
+  right: 0;
+  background-color: #333;
+  width: 200px;
+  padding: 1rem;
+  text-align: left;
+  z-index: 10;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-menu ul li {
+  margin-bottom: 1rem;
+}
+
+.mobile-menu ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 20; /* Ensures it’s above the mobile menu */
+  }
+
+  .hamburger .bar {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    margin: 3px 0;
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    display: block; /* Hidden by default */
+    position: absolute;
+    top: 60px; /* Adjust based on the hamburger’s height */
+    right: 20px; /* Align with hamburger’s right edge */
+    background-color: #333;
+    width: 200px;
+    padding: 1rem;
+    text-align: left;
+    z-index: 10;
+  }
+
+  /* Show mobile menu when 'open' is true */
+  [x-show="open"] .mobile-menu {
+    display: block !important; /* Show when 'open' is triggered */
+  }
+
+  /* Mobile Menu Styling */
+  .mobile-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .mobile-menu ul li {
+    margin-bottom: 1rem;
+  }
+
+  .mobile-menu ul li a {
+    color: white;
+    text-decoration: none;
+  }
+
+  /* Dropdown content styling on mobile */
+  [x-show="dropdownOpen"] .dropdown-content {
+    display: block !important;
+    position: static;
+    background-color: #333;
+    padding: 1rem;
+  }
+
+  .dropdown-content {
+    display: block; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Positions it directly below the button */
+    left: 0;
+    background-color: #333;
+    padding: 1rem;
+    z-index: 10;
+  }
+
+  /* Show dropdown when 'dropdownOpen' is true */
+  [x-show="dropdownOpen"] .dropdown-content {
+    display: block !important;
+  }
+}
+
+

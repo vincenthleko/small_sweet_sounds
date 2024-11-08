@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Small Sweet Sounds</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Welcome to Small Sweet Sounds</h1>
+
+    <nav class="navbar" x-data="{ open: false, dropdownOpen: false }">
+      <img src="logo.jpg" alt="Brand Logo" class="logo nav-logo" />
+
+      <!-- Desktop Menu -->
+      <ul class="nav-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+
+        <li class="nav-item" :class="{ open: dropdownOpen }">
+          <a href="#" @click="dropdownOpen = !dropdownOpen" class="nav-link"
+            >Upcoming Events ▾</a
+          >
+          <div x-show="dropdownOpen" class="dropdown-content">
+            <ul>
+              <li><a href="#">Outdoor Experience - 10/11/2024</a></li>
+              <li><a href="#">Music Fest - 12/01/2024</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Hamburger Button for Small Screens -->
+      <button @click="open = !open" class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Mobile Menu (Only visible when 'open' is true) -->
+      <div
+        x-show="open"
+        class="mobile-menu"
+        @click.away="open = false"
+        x-transition
+      >
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+
+          <!-- Mobile Dropdown for Upcoming Events -->
+          <li class="nav-item">
+            <a href="#" @click="dropdownOpen = !dropdownOpen" class="nav-link">
+              Upcoming Events ▾
+            </a>
+            <div x-show="dropdownOpen" class="dropdown-content">
+              <ul>
+                <li><a href="#">Outdoor Experience - 10/11/2024</a></li>
+                <li><a href="#">Music Fest - 12/01/2024</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div x-data="productList" x-init="fetchProducts()" id="products">
+      <template x-for="product in products" :key="product.id">
+        <div class="product">
+          <img
+            :src="`/${product.image}`"
+            :alt="product.name"
+            class="product-image"
+          />
+          <h2 x-text="product.name"></h2>
+          <p x-text="product.description"></p>
+          <p
+            x-text="new Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR' }).format(product.price)"
+          ></p>
+        </div>
+      </template>
+    </div>
+
+    <footer class="footer">
+      <p>© 2024 Small Sweet Sounds</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
